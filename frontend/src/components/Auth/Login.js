@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Card } from 'antd';
 import { login } from '../../api';
 
@@ -6,12 +7,13 @@ const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setLoading(true);
     try {
       const token = await login(username, password);
-      onLogin(token);
+      navigate('/dashboard'); 
     } catch (error) {
       console.error('Login failed:', error);
     } finally {

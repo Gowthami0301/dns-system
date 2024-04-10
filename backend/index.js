@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
