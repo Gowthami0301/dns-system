@@ -1,13 +1,13 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import routes from './routes';
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-import cors from 'cors'; 
+const express = require('express');
+const bodyParser = require('body-parser');
+const routes = require('./routes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+const cors = require('cors');
 
 const app = express();
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
@@ -24,7 +24,7 @@ const options = {
     },
   },
   // Paths to files containing OpenAPI definitions
-  apis: ['./routes/*.ts'],
+  apis: ['./routes/*.js'],
 };
 
 const specs = swaggerJsdoc(options);

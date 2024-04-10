@@ -1,6 +1,6 @@
-import express from 'express';
-import { getAllDomains, createDomain, deleteDomain, updateDomain } from '../controllers/domainsController';
-import { authenticateUser } from '../controllers/authController';
+const express = require('express');
+const { getAllDomains, createDomain, deleteDomain, updateDomain } = require('../controllers/domainsController');
+const { authenticateUser } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -167,4 +167,4 @@ router.post('/', authenticateUser, createDomain);
 router.delete('/:domainId', authenticateUser, deleteDomain);
 router.put('/:domainId', authenticateUser, updateDomain);
 
-export default router;
+module.exports = router;

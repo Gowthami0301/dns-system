@@ -1,11 +1,9 @@
-// controllers/authController.ts
-import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 // Mock user data
-const users: User[] = [
+const users = [
   {
     id: '1',
     username: 'user1',
@@ -18,18 +16,9 @@ const users: User[] = [
   },
 ];
 
-
-declare global {
-    namespace Express {
-      interface Request {
-        user?: { userId: string };
-      }
-    }
-  }
-
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
-export const login = async (req: Request, res: Response): Promise<void> => {
+exports.login = async (req, res) => {
   const { username, password } = req.body;
 
   const user = users.find((u) => u.username === username);
@@ -42,7 +31,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   res.json({ token });
 };
 
-export const authenticateUser = async (req: Request, res: Response, next: any): Promise<void> => {
+exports.authenticateUser = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
@@ -51,7 +40,7 @@ export const authenticateUser = async (req: Request, res: Response, next: any): 
   }
 
   try {
-    const decodedToken = jwt.verify(token, JWT_SECRET) as { userId: string };
+    const decodedToken = jwt.verify(token, JWT_SECRET);
     req.user = { userId: decodedToken.userId };
     next();
   } catch (error) {

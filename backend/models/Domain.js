@@ -1,10 +1,5 @@
 class Domain {
-  id: string;
-  name: string;
-  resourceRecordSetCount: number;
-  dnsRecords: DnsRecord[];
-
-  constructor(data: AWS.Route53.HostedZone) {
+  constructor(data) {
     this.id = data.Id || '';
     this.name = data.Name || '';
     this.resourceRecordSetCount = data.ResourceRecordSetCount || 0;
@@ -13,13 +8,10 @@ class Domain {
 }
 
 class DnsRecord {
-  type: string;
-  value: string;
-
-  constructor(type: string, value: string) {
+  constructor(type, value) {
     this.type = type;
     this.value = value;
   }
 }
 
-export { Domain, DnsRecord };
+module.exports = { Domain, DnsRecord };
