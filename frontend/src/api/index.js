@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:2000'; // Replace with your backend API base URL
+const BASE_URL = 'http://43.204.74.225:5000'; // Replace with your backend API base URL
 
 // Login API call
 export const login = async (username, password) => {
@@ -38,7 +38,9 @@ export const createDomain = async (domainName) => {
 
 // Delete domain API call
 export const deleteDomain = async (domainId) => {
-  try {
+  const startIndex = domainId.indexOf('/hostedzone/') + '/hostedzone/'.length;
+  domainId = domainId.substring(startIndex);
+    try {
     const token = localStorage.getItem('token'); // Retrieve token from local storage
     await axios.delete(`${BASE_URL}/domains/${domainId}`, { headers: { Authorization: `Bearer ${token}` } });
   } catch (error) {
@@ -49,6 +51,8 @@ export const deleteDomain = async (domainId) => {
 
 // Update domain API call
 export const updateDomain = async (domainId, newName, newDnsRecords) => {
+  const startIndex = domainId.indexOf('/hostedzone/') + '/hostedzone/'.length;
+  domainId = domainId.substring(startIndex);
   try {
     const token = localStorage.getItem('token');
     const response = await axios.put(

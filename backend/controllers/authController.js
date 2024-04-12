@@ -27,12 +27,13 @@ exports.login = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '12h' });
   res.json({ token });
 };
 
 exports.authenticateUser = async (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
+//  const token = req.headers.authorization?.split(' ')[1];
+const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
   if (!token) {
     res.status(401).json({ error: 'Authorization token missing' });

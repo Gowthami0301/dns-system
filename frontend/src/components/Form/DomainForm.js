@@ -42,7 +42,16 @@ const DomainForm = ({ onSubmit }) => {
             >
               <Option value="A">A</Option>
               <Option value="CNAME">CNAME</Option>
-              {/* Add other record types as needed */}
+              <Option value="A">A</Option>
+  <Option value="AAAA">AAAA</Option>
+  <Option value="CNAME">CNAME</Option>
+  <Option value="MX">MX</Option>
+  <Option value="NS">NS</Option>
+  <Option value="PTR">PTR</Option>
+  <Option value="SOA">SOA</Option>
+  <Option value="SRV">SRV</Option>
+  <Option value="TXT">TXT</Option>
+  <Option value="DNSSEC">DNSSEC</Option>
             </Select>
           </Form.Item>
           <Form.Item style={{ marginRight: 8 }}>

@@ -1,6 +1,7 @@
 // DomainTable component
 import React from 'react';
-import { Table, Button, Modal, Form, Input, Space } from 'antd';
+import {Select, Table, Button, Modal, Form, Input, Space } from 'antd';
+const { Option } = Select;
 
 const DomainTable = ({ domains, onDelete, onUpdate }) => {
   const [form] = Form.useForm();
@@ -86,7 +87,27 @@ const DomainTable = ({ domains, onDelete, onUpdate }) => {
                       fieldKey={[field.fieldKey, 'type']}
                       rules={[{ required: true, message: 'Please enter the record type' }]}
                     >
-                      <Input placeholder="Type" />
+                     
+                     <Select
+                        style={{ width: 120 }}
+                        placeholder="Select Type"
+                        onChange={(value) => {
+                          const updatedRecords = [...form.getFieldValue('newDnsRecords')];
+                          updatedRecords[index].type = value;
+                          form.setFieldsValue({ newDnsRecords: updatedRecords });
+                        }}
+                      >
+                        <Option value="A">A</Option>
+                        <Option value="AAAA">AAAA</Option>
+                        <Option value="CNAME">CNAME</Option>
+                        <Option value="MX">MX</Option>
+                        <Option value="NS">NS</Option>
+                        <Option value="PTR">PTR</Option>
+                        <Option value="SOA">SOA</Option>
+                        <Option value="SRV">SRV</Option>
+                        <Option value="TXT">TXT</Option>
+                        <Option value="DNSSEC">DNSSEC</Option>
+                      </Select>
                     </Form.Item>
                     <Form.Item
                       {...field}

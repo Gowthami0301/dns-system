@@ -21,6 +21,9 @@ const Dashboard = () => {
       setDomains(data);
     } catch (error) {
       console.error('Failed to fetch domains:', error);
+        localStorage.removeItem("token")
+        window.location.href = '/';
+      
     }
   };
 

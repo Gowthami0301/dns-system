@@ -44,15 +44,29 @@ const DomainChart = ({ domains }) => {
 };
 
 const DomainCharts = ({ domains }) => {
+  // Chunk domains array into groups of three
+  const chunkedDomains = domains.reduce((acc, curr, index) => {
+    const chunkIndex = Math.floor(index / 3);
+    if (!acc[chunkIndex]) {
+      acc[chunkIndex] = []; // start a new chunk
+    }
+    acc[chunkIndex].push(curr);
+    return acc;
+  }, []);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-      <Card title="Overall" style={{ width: 400 }}>
-        <DomainChart domains={domains} />
-      </Card>
-      {domains.map((domain, index) => (
-        <Card title={domain.name} key={index} style={{ width: 400 }}>
-          <DomainChart domains={[domain]} />
-        </Card>
+    <div>
+      {chunkedDomains.map((chunk, chunkIndex) => (
+        <div key={chunkIndex} style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
+          {chunk.map((domain, index) => (
+            <Card title={domain.name} key={index} style={{ width: 400 }}>
+              <DomainChart domains={[domain]} />
+            </Card>
+          ))}      
+          {[...Array(3 - chunk.length)].map((_, index) => (
+            <Card key={chunk.length + index} style={{ visibility: 'hidden', width: 400 }} />
+          ))}
+        </div>
       ))}
     </div>
   );
