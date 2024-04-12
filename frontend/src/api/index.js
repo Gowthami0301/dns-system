@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://43.204.74.225:5000'; // Replace with your backend API base URL
+const BASE_URL = 'http://localhost:5000'; // Replace with your backend API base URL
 
 // Login API call
 export const login = async (username, password) => {
